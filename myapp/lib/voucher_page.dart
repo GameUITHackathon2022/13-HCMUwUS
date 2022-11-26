@@ -68,11 +68,17 @@ class VoucherPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var backPage = Container(
-        child: Align(
-      alignment: Alignment.topCenter,
-      child:
-          const Image(image: NetworkImage('https://picsum.photos/250?image=9')),
-    ));
+      padding: EdgeInsets.all(30),
+      child: Align(
+        alignment: Alignment.topCenter,
+        child: Container(
+          child: const Image(
+            image: AssetImage('images/love_the_earth_1.png'),
+            height: 225,
+          ),
+        ),
+      ),
+    );
     var voucherList = VoucherList(vouchers: vouchers);
     var titleWidget = Container(
       padding: EdgeInsets.all(20),
@@ -81,6 +87,7 @@ class VoucherPage extends StatelessWidget {
           width: 1,
           color: Colors.grey.shade200,
         ),
+        borderRadius: BorderRadius.circular(30),
       ),
       child: Row(
         children: [
@@ -89,7 +96,8 @@ class VoucherPage extends StatelessWidget {
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Spacer(),
-          Icon(Icons.add),
+          Image.asset('images/point_icon.png', height: 24),
+          SizedBox(width: 10),
           Text(
             "0",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -108,10 +116,10 @@ class VoucherPage extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.25),
+            color: Colors.black.withOpacity(0.1),
             spreadRadius: 0,
             blurRadius: 4,
-            offset: Offset(0, -3), // changes position of shadow
+            offset: Offset(0, -7), // changes position of shadow
           ),
         ],
       ),
@@ -140,7 +148,7 @@ class VoucherPage extends StatelessWidget {
           backPage,
           Column(children: [
             Expanded(child: SizedBox(), flex: 2),
-            Expanded(flex: 7, child: mainContent)
+            Expanded(flex: 5, child: mainContent)
           ]),
         ],
       ),
