@@ -1,3 +1,4 @@
+import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'gift_list.dart';
 import 'Voucher.dart';
@@ -80,7 +81,9 @@ class PointTrackingPage extends StatelessWidget {
           width: 600,
         ),
         Positioned(
-          child: IconButton(icon: Icon(Icons.clear), onPressed: () {}),
+          child: IconButton(icon: Icon(Icons.clear), onPressed: () {
+            Navigator.pop(context);
+          }),
           top: 0,
           right: 10,
         ),

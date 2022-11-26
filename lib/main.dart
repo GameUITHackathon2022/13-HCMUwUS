@@ -1,36 +1,59 @@
+import 'package:classify/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/Voucher.dart';
-import 'package:myapp/home_page.dart';
-import 'package:myapp/voucher_page.dart';
-import 'package:myapp/Gift.dart';
+import 'package:camera/camera.dart';
+import 'Voucher.dart';
+import 'home_page.dart';
+import 'voucher_page.dart';
+import 'Gift.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+// Future<void> main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   final cameras = await availableCameras();
+//   final firstCamera = cameras.first;
+  
+//    @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: 'Flutter Demo',
+//       theme: ThemeData(
+//           // This is the theme of your application.
+//           //
+//           // Try running your application with "flutter run". You'll see the
+//           // application has a blue toolbar. Then, without quitting the app, try
+//           // changing the primarySwatch below to Colors.green and then invoke
+//           // "hot reload" (press "r" in the console where you ran "flutter run",
+//           // or simply save your changes to "hot reload" in a Flutter IDE).
+//           // Notice that the counter didn't reset back to zero; the application
+//           // is not restarted.
+//           primarySwatch: Colors.blueGrey,
+//           fontFamily: 'SVN-Poppins'),
+//       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
+//       home: const TakePictureScreen(camera: firstCamera);
+//     );
+//   }
+// }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+Future<void> main() async {
+  // Ensure that plugin services are initialized so that `availableCameras()`
+  // can be called before `runApp()`
+  WidgetsFlutterBinding.ensureInitialized();
 
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or simply save your changes to "hot reload" in a Flutter IDE).
-          // Notice that the counter didn't reset back to zero; the application
-          // is not restarted.
-          primarySwatch: Colors.blueGrey,
-          fontFamily: 'SVN-Poppins'),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
+  // Obtain a list of the available cameras on the device.
+  final cameras = await availableCameras();
+
+  // Get a specific camera from the list of available cameras.
+  final firstCamera = cameras.first;
+
+  runApp(
+    MaterialApp(
+      theme: ThemeData(primarySwatch: Colors.blueGrey,
+           fontFamily: 'SVN-Poppins'),
+      home: TakePictureScreen(
+        // Pass the appropriate camera to the TakePictureScreen widget.
+        camera: firstCamera,
+      ),
+    ),
+  );
 }
 
 class MyHomePage extends StatefulWidget {
@@ -117,7 +140,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () async {
+          Navigator.push(context, MaterialPageRoute<void>(
+            builder: (BuildContext context) => const Material(child:HomePage()),
+            ));
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.

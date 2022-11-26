@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:tflite/tflite.dart';
 
 import "home_page.dart";
+import "main.dart";
 
 Future<void> main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
@@ -179,7 +180,7 @@ class DisplayPictureScreen extends StatelessWidget {
       floatingActionButton: outputs.isNotEmpty ? FloatingActionButton(
         onPressed: () {
           Navigator.push(context, MaterialPageRoute<void>(
-            builder: (BuildContext context) => const Material(child:HomePage()),
+            builder: (BuildContext context) => const Material(child:MyHomePage(title: 'Flutter Demo Home Page')),
             ));
         },
         child: const Icon(Icons.check),
