@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:myapp/status_line.dart';
 
 class ButtonWithIcon extends StatelessWidget {
   final IconData icon;
@@ -85,7 +86,7 @@ class BottomButtonGroup extends StatelessWidget {
       children: [
         IconButton(
           onPressed: () {},
-          icon: const Icon(Icons.home),
+          icon: const Icon(Icons.add),
         ),
         ElevatedButton(
           onPressed: () {},
@@ -106,8 +107,9 @@ class ExitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var icon_btn = IconButton(
+      color: Colors.grey.shade600,
       alignment: Alignment.topRight,
-      icon: const Icon(Icons.exit_to_app),
+      icon: const Icon(Icons.clear_rounded),
       onPressed: () {
         Navigator.pop(context);
       },
@@ -139,6 +141,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: const [
             FunctionalButtonGroup(),
+            StatusLine(),
             BottomButtonGroup(),
           ],
         ),
