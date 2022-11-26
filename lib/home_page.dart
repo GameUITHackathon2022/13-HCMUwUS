@@ -89,6 +89,12 @@ class BottomButtonGroup extends StatelessWidget {
           onPressed: () {},
           child: const Text('Chia sẻ cho bạn bè'),
         ),
+        FloatingActionButton(
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute<void>(
+            builder: (BuildContext context) => const Material(child:HomePage()),
+            )
+          );})
       ],
     );
 
@@ -156,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   ExitButton(),
                   const Image(
-                    image: AssetImage("Home.png"),
+                    image: AssetImage("images/home.png"),
                   ),
                 ],
               ),

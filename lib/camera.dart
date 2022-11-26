@@ -3,6 +3,9 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
+import 'package:tflite/tflite.dart';
+
+import "home_page.dart";
 
 Future<void> main() async {
   // Ensure that plugin services are initialized so that `availableCameras()`
@@ -43,6 +46,10 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
 
+  List _outputs = ["Glass", "Plastic", "Metal", "Paper"];
+  File _image = File("");
+  bool _loading = false;
+
   @override
   void initState() {
     super.initState();
@@ -57,14 +64,16 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
     // Next, initialize the controller. This returns a Future.
     _initializeControllerFuture = _controller.initialize();
+
+    _loading = true;
+
+    loadModel().then((value) {
+      setState(() {
+        _loading = false;
+      });
+    });
   }
 
-  @override
-  void dispose() {
-    // Dispose of the controller when the widget is disposed.
-    _controller.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +108,8 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             final image = await _controller.takePicture();
 
             if (!mounted) return;
+          
+            classifyImage(File(image.path));
 
             // If the picture was taken, display it on a new screen.
             await Navigator.of(context).push(
@@ -107,6 +118,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
                   // Pass the automatically generated path to
                   // the DisplayPictureScreen widget.
                   imagePath: image.path,
+                  outputs: _outputs
                 ),
               ),
             );
@@ -119,23 +131,56 @@ class TakePictureScreenState extends State<TakePictureScreen> {
       ),
     );
   }
+
+  classifyImage(File image) async {
+    print("Before Classified ${image.path}");
+    var output = await Tflite.runModelOnImage(
+      path: image.path,
+      numResults: 6,
+      threshold: 0.1,
+      imageMean: 127.5,
+      imageStd: 127.5,
+    );
+    print("Classified ${image.path}");
+    setState(() {
+      _loading = false;
+      _outputs = output!;
+    });
+    print("After Classified ${image.path}");
+  }
+
+  loadModel() async {
+    await Tflite.loadModel(
+      model: "assets/model_unquant.tflite",
+      labels: "assets/labels.txt",
+    );
+  }
+
+  @override
+  void dispose() {
+    Tflite.close();
+    _controller.dispose();
+    super.dispose();
+  }
 }
 
 // A widget that displays the picture taken by the user.
 class DisplayPictureScreen extends StatelessWidget {
   final String imagePath;
-  final isRecyclable = false;
-  const DisplayPictureScreen({super.key, required this.imagePath});
+  final List outputs;
+  const DisplayPictureScreen({super.key, required this.imagePath, required this.outputs});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(title: const Text('Display the Picture')),
-      bottomSheet: Text("Recyclable: $isRecyclable"),
-      floatingActionButton: isRecyclable ? FloatingActionButton(
+      bottomSheet: Text("Recyclable trash: ${outputs}"),
+      floatingActionButton: outputs.isNotEmpty ? FloatingActionButton(
         onPressed: () {
-          Navigator.pop(context);
+          Navigator.push(context, MaterialPageRoute<void>(
+            builder: (BuildContext context) => const Material(child:HomePage()),
+            ));
         },
         child: const Icon(Icons.check),
       ) : FloatingActionButton(

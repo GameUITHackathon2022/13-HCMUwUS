@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/gift_list.dart';
+import 'gift_list.dart';
 import 'Voucher.dart';
 import 'Gift.dart';
 
