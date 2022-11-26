@@ -13,14 +13,27 @@ class VoucherItem extends StatelessWidget {
       ],
     );
     var card = Card(
-      color: Colors.white70,
+      color: Colors.white,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           ListTile(
-            leading: Icon(Icons.add),
-            title: Text(voucher.name),
+            leading: ClipRRect(
+              borderRadius: BorderRadius.circular(12), // Image border
+              child: SizedBox.fromSize(
+                size: Size.square(54), // Image radius
+                child: Image.network(
+                    'https://content.instructables.com/FCH/29A4/K8ZZOIBW/FCH29A4K8ZZOIBW.jpg?auto=webp&fit=bounds&frame=1&height=1024&width=1024auto=webp&frame=1&height=150',
+                    fit: BoxFit.cover),
+              ),
+            ),
+            title: Text(voucher.name,
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             subtitle: Text('1000 điểm'),
+            trailing: IconButton(
+              icon: Icon(Icons.arrow_forward),
+              onPressed: () {},
+            ),
           ),
         ],
       ),
@@ -61,6 +74,29 @@ class VoucherPage extends StatelessWidget {
           const Image(image: NetworkImage('https://picsum.photos/250?image=9')),
     ));
     var voucherList = VoucherList(vouchers: vouchers);
+    var titleWidget = Container(
+      padding: EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        border: Border.all(
+          width: 1,
+          color: Colors.grey.shade200,
+        ),
+      ),
+      child: Row(
+        children: [
+          Text(
+            VoucherPage.title,
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          Spacer(),
+          Icon(Icons.add),
+          Text(
+            "0",
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
     var mainContent = Container(
       width: 400,
       padding: EdgeInsets.all(10),
@@ -75,7 +111,7 @@ class VoucherPage extends StatelessWidget {
             color: Colors.black.withOpacity(0.25),
             spreadRadius: 0,
             blurRadius: 4,
-            offset: Offset(0, 4), // changes position of shadow
+            offset: Offset(0, -3), // changes position of shadow
           ),
         ],
       ),
@@ -85,8 +121,9 @@ class VoucherPage extends StatelessWidget {
           width: 400,
           child: Column(
             children: [
-              Text(title,
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              titleWidget,
+              SizedBox(height: 20),
+              Text("Quà tặng từ nhà tài trợ", style: TextStyle(fontSize: 20)),
               SizedBox(
                 child: VoucherList(vouchers: vouchers),
                 height: 400,
@@ -97,11 +134,16 @@ class VoucherPage extends StatelessWidget {
       ),
     );
 
-    return Stack(
-      children: [
-        backPage,
-        mainContent,
-      ],
+    return Expanded(
+      child: Stack(
+        children: [
+          backPage,
+          Column(children: [
+            Expanded(child: SizedBox(), flex: 2),
+            Expanded(flex: 7, child: mainContent)
+          ]),
+        ],
+      ),
     );
   }
 }

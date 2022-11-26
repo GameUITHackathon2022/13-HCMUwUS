@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:myapp/status_line.dart';
 
 class ButtonWithIcon extends StatelessWidget {
   final IconData icon;
@@ -142,7 +141,6 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           children: const [
             FunctionalButtonGroup(),
-            StatusLine(),
             BottomButtonGroup(),
           ],
         ),
