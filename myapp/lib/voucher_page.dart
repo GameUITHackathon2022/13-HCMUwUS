@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/gift_list.dart';
 import 'Voucher.dart';
+import 'Gift.dart';
 
 class VoucherItem extends StatelessWidget {
   final Voucher voucher;
@@ -60,22 +62,36 @@ class VoucherList extends StatelessWidget {
   }
 }
 
-class VoucherPage extends StatelessWidget {
+class PointTrackingPage extends StatelessWidget {
   final List<Voucher> vouchers;
+  final List<Gift> gifts;
   static String title = "Đổi điểm";
-  VoucherPage({super.key, @required vouchers}) : vouchers = vouchers;
+  PointTrackingPage({super.key, @required vouchers, @required gifts})
+      : vouchers = vouchers,
+        gifts = gifts;
 
   @override
   Widget build(BuildContext context) {
+    var imageStack = Stack(
+      children: [
+        const Image(
+          image: AssetImage('images/love_the_earth_1.png'),
+          height: 225,
+          width: 600,
+        ),
+        Positioned(
+          child: IconButton(icon: Icon(Icons.clear), onPressed: () {}),
+          top: 0,
+          right: 10,
+        ),
+      ],
+    );
     var backPage = Container(
-      padding: EdgeInsets.all(30),
+      padding: EdgeInsets.symmetric(vertical: 40),
       child: Align(
         alignment: Alignment.topCenter,
         child: Container(
-          child: const Image(
-            image: AssetImage('images/love_the_earth_1.png'),
-            height: 225,
-          ),
+          child: imageStack,
         ),
       ),
     );
@@ -92,14 +108,14 @@ class VoucherPage extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            VoucherPage.title,
+            PointTrackingPage.title,
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           Spacer(),
           Image.asset('images/point_icon.png', height: 24),
           SizedBox(width: 10),
           Text(
-            "0",
+            "1000",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ],
@@ -130,11 +146,16 @@ class VoucherPage extends StatelessWidget {
           child: Column(
             children: [
               titleWidget,
-              SizedBox(height: 20),
-              Text("Quà tặng từ nhà tài trợ", style: TextStyle(fontSize: 20)),
+              SizedBox(height: 10),
+              Text("Đổi quà",
+                  textAlign: TextAlign.left,
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              SizedBox(child: GiftList(gifts: gifts), height: 200),
+              Text("Quà tặng từ nhà tài trợ",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
               SizedBox(
                 child: VoucherList(vouchers: vouchers),
-                height: 400,
+                height: 200,
               ),
             ],
           ),
