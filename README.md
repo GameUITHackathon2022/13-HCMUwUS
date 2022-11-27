@@ -2,6 +2,11 @@
 
 A new Flutter project.
 
+## Video demo
+
+[Video youtube demo](https://www.youtube.com/watch?v=V-aAsaX2n4A)
+
+
 ## User segmentation
 
 - People who are concerned about the environment
