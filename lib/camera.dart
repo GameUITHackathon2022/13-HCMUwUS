@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
@@ -47,7 +49,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   late CameraController _controller;
   late Future<void> _initializeControllerFuture;
 
-  List _outputs = ["Glass", "Plastic", "Metal", "Paper"];
+  List _outputs = [];
   File _image = File("");
   bool _loading = false;
 
