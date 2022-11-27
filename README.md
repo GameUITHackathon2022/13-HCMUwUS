@@ -2,15 +2,36 @@
 
 A new Flutter project.
 
-## Getting Started
+## User segmentation
 
-This project is a starting point for a Flutter application.
+- People who are concerned about the environment
 
-A few resources to get you started if this is your first Flutter project:
+## Value propositions
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Helping people create trash clarification habit
+- Help trash processing company cut down trash sorting cost
+- Have a strong impact on environmental protection
+- Populate green brands
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+## Technology
+
+- Trash type validation using AI
+
+## Funding
+
+- Garbage disposal
+- Advertisement
+- Fundraising
+
+## Future partner
+
+- Home Lab
+- T-Tech Việt Nam
+- Mê xà phòng
+
+![alt text](https://github.com//GameUITHackathon2022/13-HCMUwUS/edit/main/Trasify idea Summary.png?raw=true)
+
+
+
+
