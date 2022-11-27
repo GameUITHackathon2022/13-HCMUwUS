@@ -16,7 +16,9 @@ A new Flutter project.
 
 ## Technology
 
-- Trash type validation using AI
+- Flutter
+- Dart
+- Tensorflow
 
 ## Funding
 
@@ -29,8 +31,6 @@ A new Flutter project.
 - Home Lab
 - T-Tech Việt Nam
 - Mê xà phòng
-
-![alt text](https://github.com//GameUITHackathon2022/13-HCMUwUS/edit/main/Trasify idea Summary.png?raw=true)
 
 
 
