@@ -1,6 +1,5 @@
-# Trassify
+# Trassify - Make a new habit for a better planet
 
-A new Flutter project.
 
 ## Video demo
 
@@ -31,7 +30,7 @@ A new Flutter project.
 - Advertisement
 - Fundraising
 
-## Future partner
+## Future partners
 
 - Home Lab
 - T-Tech Việt Nam
