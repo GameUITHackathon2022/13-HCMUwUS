@@ -37,6 +37,7 @@ A new Flutter project.
 - T-Tech Việt Nam
 - Mê xà phòng
 
-
+## Trassify Business Model
+![alt text](https://github.com/GameUITHackathon2022/13-HCMUwUS/blob/main/trassify-business-model-canvas.png)
 
 
